@@ -21,7 +21,7 @@ export const CharacterModal: React.FC<CharacterModalProps> = ({ open, onClose, c
         return null;
     }
 
-    const charDetails = Object.keys(char).filter(key => key !== 'char_id').map(key => `${key}: ${char[key]}`);
+    const charDetails = Object.entries(char).filter(([key]) => key !== 'char_id').map(([key, value]) => `${key}: ${value}`);
 
     return (
         <Dialog
