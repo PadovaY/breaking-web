@@ -40,3 +40,7 @@ using the latest FE technologies such as:
 
 # How to start the project?
 clone the repo, run `yarn` and then `yarn start`
+
+# How to run tests? 
+run `yarn test` for unit tests
+run `yarn e2e` to open cypress runner  
