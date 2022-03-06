@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
 import styled from 'styled-components';
 
@@ -11,15 +11,20 @@ interface BaseFilterProps {
 }
 
 export const BaseFilter: React.FC<BaseFilterProps> = ({ onChange, value, selections, label }) => {
+    const onValueChange = useCallback(
+        (e) => onChange(e?.target?.value as string),
+        [])
+
     return (
         <FilterControl>
-            <InputLabel id="demo-simple-select-label">{label}</InputLabel>
+            <InputLabel>{label}</InputLabel>
             <Select
+                data-testid={`filter-${label}`}
                 value={value}
-                label="Status"
-                onChange={(e) => onChange(e?.target?.value as string)}
+                label={label}
+                onChange={onValueChange}
             >
-                {['None', ...selections].map(value => <MenuItem key={value} value={value === 'None' ? undefined : value}>{value}</MenuItem>)}
+                {['None', ...selections].map(value => <MenuItem data-testid={`select-${value}`} key={value} value={value === 'None' ? undefined : value}>{value}</MenuItem>)}
             </Select>
         </FilterControl>);
 }

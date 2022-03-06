@@ -3,7 +3,7 @@ import { BaseFilter } from './BaseFilter';
 import { useFilters } from '../../hooks/useFilters';
 import { FilterType } from '../../FiltersContext';
 
-const STATUS_LIST = ['Alive', 'Deceased']
+const STATUS_LIST = ['Alive', 'Deceased', 'Presumed dead']
 
 export const StatusFilter: React.FC = () => {
     const { setFilterValue, currentFilters } = useFilters();

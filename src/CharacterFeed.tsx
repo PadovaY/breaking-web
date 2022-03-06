@@ -1,8 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 import { useInfiniteQuery } from 'react-query';
 import styled from 'styled-components';
-import { BASE_API_URL } from './App';
 import { CharacterCard } from './components/CharacterCard/CharacterCard';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { Character } from './types';
@@ -10,10 +8,11 @@ import { EndMessage } from './components/Loadrs/EndMessage';
 import { LoaderMessage } from './components/Loadrs/LoaderMessage';
 import { Header } from './components/Header/Header';
 import { SearchBar } from './components/SearchBar/SearchBar';
-import { FiltersContext, FilterType } from './FiltersContext';
+import { FiltersContext } from './FiltersContext';
 import { CharacterModal } from './components/CharacterModal/CharacterModal';
+import { fetchInitialData, fetchSearchData, filterData } from './utils';
 
-const PAGE_SIZE = 15;
+export const PAGE_SIZE = 15;
 
 export const CharacterFeed = () => {
     const [searchTerm, setSearchTerm] = useState<string | undefined>(undefined)
@@ -21,9 +20,7 @@ export const CharacterFeed = () => {
     const { currentFilters } = useContext(FiltersContext);
     const { isLoading, data, fetchNextPage, hasNextPage } = useInfiniteQuery(
         "initialChars",
-        ({ pageParam = 0 }) => axios.get(
-            `${BASE_API_URL}/characters?limit=${PAGE_SIZE}&offset=${PAGE_SIZE * pageParam}`
-        ).then(res => res.data),
+        fetchInitialData,
         {
             getNextPageParam: (lastPage, allPages) => lastPage.length === PAGE_SIZE ? allPages.length + 1 : undefined,
             enabled: !searchTerm
@@ -32,15 +29,12 @@ export const CharacterFeed = () => {
 
     const { data: searchData, isLoading: isSearchLoading, refetch } = useInfiniteQuery(
         "searchChars",
-        ({ pageParam = 0 }) => axios.get(
-            `${BASE_API_URL}/characters?name=${searchTerm?.replace(' ', '+')}&limit=${PAGE_SIZE}&offset=${PAGE_SIZE * pageParam}`
-        ).then(res => res.data),
+        ({ pageParam = 0 }) => fetchSearchData({ pageParam, searchTerm }),
         {
             getNextPageParam: (lastPage, allPages) => lastPage.length === PAGE_SIZE ? allPages.length + 1 : undefined,
             enabled: !!searchTerm?.length
         }
     );
-
 
     useEffect(() => {
         if (searchTerm) {
@@ -48,11 +42,11 @@ export const CharacterFeed = () => {
         }
     }, [searchTerm])
 
-    const charsData = (searchTerm?.length ? searchData?.pages.flat() || [] : data?.pages.flat() || []).filter((char: Character) => {
-        const isStatusFilterValid = currentFilters[FilterType.STATUS] ? char.status === currentFilters[FilterType.STATUS] : true
-        const isSeasonFilterValid = currentFilters[FilterType.SEASON] ? char.appearance.includes(parseInt(currentFilters[FilterType.SEASON] || '0')) : true
-        return isStatusFilterValid && isSeasonFilterValid;
-    });
+    const onModalClose = useCallback(() => setSelectedChar(undefined), []);
+
+    const charsData = (searchTerm?.length ? searchData?.pages.flat() : data?.pages.flat()) || []
+        .filter((char: Character) => filterData(char, currentFilters));
+    const finishedLoadingData = !isLoading && charsData;
 
     return (
         <Container>
@@ -61,13 +55,13 @@ export const CharacterFeed = () => {
             <InfiniteScroll
                 dataLength={charsData.length}
                 next={fetchNextPage}
-                hasMore={hasNextPage || false}
+                hasMore={!!hasNextPage}
                 loader={(isLoading || isSearchLoading) && <LoaderMessage />}
                 endMessage={charsData.length && <EndMessage />}>
                 <CharactersContainer>
-                    {!isLoading && data && charsData.map((char: Character) => <CharacterCard key={char.char_id} char={char} onClick={() => setSelectedChar(char)} />)}
+                    {finishedLoadingData && charsData.map((char: Character) => <CharacterCard key={char.char_id} char={char} onClick={() => setSelectedChar(char)} />)}
                 </CharactersContainer>
-                <CharacterModal open={!!selectedChar?.char_id} onClose={() => setSelectedChar(undefined)} char={selectedChar} />
+                <CharacterModal open={!!selectedChar?.char_id} onClose={onModalClose} char={selectedChar} />
             </InfiniteScroll>
         </Container >)
 }
@@ -85,4 +79,3 @@ const CharactersContainer = styled.div({
     flexWrap: 'wrap',
     justifyContent: 'center'
 })
-

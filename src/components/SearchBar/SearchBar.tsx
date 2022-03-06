@@ -2,7 +2,6 @@ import React, { useCallback } from 'react';
 import { TextField } from '@material-ui/core';
 import styled from 'styled-components';
 import { Text } from '../Text/Text';
-import { theme } from '../../theme';
 import { StatusFilter } from '../Filter/StatusFilter';
 import { SeasonFilter } from '../Filter/SeasonFilter';
 interface SearchBarProps {
@@ -16,13 +15,13 @@ export const SearchBar: React.FC<SearchBarProps> = ({ value, onChange }) => {
     return (
         <Container>
             <SearchContainer>
-                <Text text="Search by name: " />
-                <TextField label="type anything" variant="outlined" value={value} onChange={onInputChange} />
+                <Text text="Search by name: " variant='body1' />
+                <TextField data-testid="searchInput" label="type anything" variant="outlined" value={value} onChange={onInputChange} />
+                <Filters>
+                    <StatusFilter />
+                    <SeasonFilter />
+                </Filters>
             </SearchContainer>
-            <Filters>
-                <StatusFilter />
-                <SeasonFilter />
-            </Filters>
         </Container>
     )
 }
@@ -32,18 +31,20 @@ const Container = styled.div(({ theme }) => ({
 }));
 
 const SearchContainer = styled.div(({ theme }) => ({
-    height: 100,
     margin: '0 auto',
-    width: '50%',
+    maxWidth: '50%',
     backgroundColor: theme.colors.common.white,
     borderRadius: theme.radius.main,
     display: 'flex',
     alignItems: 'center',
-    padding: `0 ${theme.spacing.base}px`
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    padding: `${theme.spacing.base}px`
 }));
 
 const Filters = styled.div(({ theme }) => ({
     width: 400,
+    flexWrap: 'wrap',
     display: 'flex',
     justifyContent: 'space-around',
     borderRadius: theme.radius.sub,
