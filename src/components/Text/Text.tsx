@@ -11,11 +11,11 @@ interface TextProps {
 
 export const Text: React.FC<TextProps> = ({ text, variant = 'subtitle2', color }) => {
     return (
-        <TypographyStyled variant={variant} textColor={color}>{text}</TypographyStyled>
+        <TypographyStyled variant={variant} textcolor={color}>{text}</TypographyStyled>
     )
 }
 
-const TypographyStyled = styled(Typography)<{ textColor?: string }>(({ theme, textColor }) => ({
+const TypographyStyled = styled(Typography)<{ textcolor?: string }>(({ theme, textcolor }) => ({
     paddingRight: theme.spacing.petit,
-    color: textColor || theme.colors.common.white
+    color: textcolor || theme.colors.common.white
 }))

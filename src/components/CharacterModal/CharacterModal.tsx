@@ -70,6 +70,5 @@ const ImageContainer = styled.div({
 const closeStyle = {
     position: 'absolute',
     right: 8,
-    top: 8,
-    color: (theme) => theme.palette.grey[500]
+    top: 8
 }

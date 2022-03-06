@@ -24,7 +24,12 @@ export const BaseFilter: React.FC<BaseFilterProps> = ({ onChange, value, selecti
                 label={label}
                 onChange={onValueChange}
             >
-                {['None', ...selections].map(value => <MenuItem data-testid={`select-${value}`} key={value} value={value === 'None' ? undefined : value}>{value}</MenuItem>)}
+                {['None', ...selections]
+                    .map(selectionValue => <MenuItem
+                        data-testid={`select-${selectionValue}`}
+                        key={selectionValue} value={selectionValue === 'None' ? undefined : selectionValue}>
+                        {selectionValue}
+                    </MenuItem>)}
             </Select>
         </FilterControl>);
 }

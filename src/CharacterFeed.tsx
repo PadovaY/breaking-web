@@ -44,8 +44,8 @@ export const CharacterFeed = () => {
 
     const onModalClose = useCallback(() => setSelectedChar(undefined), []);
 
-    const charsData = (searchTerm?.length ? searchData?.pages.flat() : data?.pages.flat()) || []
-        .filter((char: Character) => filterData(char, currentFilters));
+    const charsData = (searchTerm?.length ? searchData?.pages.flat() : data?.pages?.flat())
+        ?.filter((char: Character) => filterData(char, currentFilters)) || [];
     const finishedLoadingData = !isLoading && charsData;
 
     return (
