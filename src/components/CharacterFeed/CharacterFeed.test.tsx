@@ -1,3 +1,4 @@
+import React from 'react';
 import { renderWithProvider } from '../../TestRender';
 import { CharacterFeed } from './CharacterFeed';
 

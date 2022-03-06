@@ -1,3 +1,4 @@
+import React from 'react';
 import { fireEvent } from '@testing-library/react';
 import { renderWithProvider } from '../../TestRender';
 import { CharacterModal } from './CharacterModal';

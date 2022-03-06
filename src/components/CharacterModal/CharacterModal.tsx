@@ -2,7 +2,7 @@ import React from 'react';
 import IconButton from '@mui/material/IconButton';
 import { Character } from '../../types';
 import CloseIcon from '@mui/icons-material/Close';
-import { Dialog, DialogTitle, DialogContent, DialogContentText } from '@mui/material';
+import { Dialog, DialogTitle, DialogContent } from '@mui/material';
 import { Text } from '../Text/Text';
 import styled from 'styled-components';
 import { theme } from '../../theme';

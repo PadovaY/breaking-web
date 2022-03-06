@@ -21,5 +21,10 @@ module.exports = {
         "@typescript-eslint"
     ],
     "rules": {
-    }
+    },  
+    "overrides": [
+        {
+          "files": [ "src/**/*.js" ]
+        }
+      ]
 }
