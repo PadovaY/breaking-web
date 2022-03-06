@@ -1,21 +1,23 @@
+/// <reference types="cypress" />
+//@ts-check
 describe('scroll characters', () => {
     beforeEach(() => {
-      // Cypress starts out with a blank slate for each test
-      // so we must tell it to visit our website with the `cy.visit()` command.
-      // Since we want to visit the same URL at the start of all our tests,
-      // we include it in our beforeEach function so that it runs before each test
       cy.visit('http://localhost:3000/')
     })
   
-    it('should scroll infinitely', () => {
-        cy.get('[data-testid="charCard"]');
-        cy.scrollTo('bottom', { duration: 1000});
-        cy.scrollTo('bottom', { duration: 1000});
-        cy.scrollTo('bottom', { duration: 1000});
-        cy.scrollTo('bottom', { duration: 1000});
-        cy.scrollTo('bottom', { duration: 1000});
-        cy.contains('Yay! You have seen it all 😎');
+    it('should apply status filter', () => {
+      cy.get('[data-testid="charCard"]').should('have.length', 15);
+      cy.get('[data-testid="filter-Status"]').click();
+      cy.get('[data-testid="select-Presumed dead"]').click();
+      cy.get('[data-testid="charCard"]').should('have.length', 1);
+   
     })
 
+    it('should apply season filter', () => {
+      cy.get('[data-testid="charCard"]').should('have.length', 15);
+      cy.get('[data-testid="filter-Season"]').click();
+      cy.get('[data-testid="select-1"]').click();
+      cy.get('[data-testid="charCard"]').should('have.length', 9);
     });
+});
   

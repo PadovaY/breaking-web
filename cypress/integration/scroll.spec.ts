@@ -1,3 +1,4 @@
+/// <reference types="cypress" />
 describe('scroll characters', () => {
     beforeEach(() => {
       // Cypress starts out with a blank slate for each test
@@ -8,14 +9,14 @@ describe('scroll characters', () => {
     })
   
     it('should scroll infinitely', () => {
-        cy.get('[data-testid="charCard"]');
-        cy.scrollTo('bottom', { duration: 1000});
-        cy.scrollTo('bottom', { duration: 1000});
-        cy.scrollTo('bottom', { duration: 1000});
-        cy.scrollTo('bottom', { duration: 1000});
-        cy.scrollTo('bottom', { duration: 1000});
-        cy.contains('Yay! You have seen it all 😎');
+      cy.get('[data-testid="charCard"]').should('have.length', 15);
+      cy.scrollTo('bottom', { duration: 1000});
+      cy.get('[data-testid="charCard"]').should('have.length', 30);
+      cy.scrollTo('bottom', { duration: 1000});
+      cy.get('[data-testid="charCard"]').should('have.length', 45);
+      cy.scrollTo('bottom', { duration: 1000});
+      cy.contains('Yay! You have seen it all 😎');
     })
 
-    });
+});
   
