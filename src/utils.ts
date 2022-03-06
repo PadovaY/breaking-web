@@ -1,6 +1,6 @@
 import axios from "axios";
 import { BASE_API_URL } from "./App";
-import { PAGE_SIZE } from "./CharacterFeed";
+import { PAGE_SIZE } from "./components/CharacterFeed/CharacterFeed";
 import { FilterType } from "./FiltersContext";
 import { Character } from "./types";
 

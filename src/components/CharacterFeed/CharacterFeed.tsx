@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useContext, useCallback } from 'react';
 import { useInfiniteQuery } from 'react-query';
 import styled from 'styled-components';
-import { CharacterCard } from './components/CharacterCard/CharacterCard';
+import { CharacterCard } from '../CharacterCard/CharacterCard';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { Character } from './types';
-import { EndMessage } from './components/Loadrs/EndMessage';
-import { LoaderMessage } from './components/Loadrs/LoaderMessage';
-import { Header } from './components/Header/Header';
-import { SearchBar } from './components/SearchBar/SearchBar';
-import { FiltersContext } from './FiltersContext';
-import { CharacterModal } from './components/CharacterModal/CharacterModal';
-import { fetchInitialData, fetchSearchData, filterData } from './utils';
+import { Character } from '../../types';
+import { EndMessage } from '../Loadrs/EndMessage';
+import { LoaderMessage } from '../Loadrs/LoaderMessage';
+import { Header } from '../Header/Header';
+import { SearchBar } from '../SearchBar/SearchBar';
+import { FiltersContext } from '../../FiltersContext';
+import { CharacterModal } from '../CharacterModal/CharacterModal';
+import { fetchInitialData, fetchSearchData, filterData } from '../../utils';
 
 export const PAGE_SIZE = 15;
 
