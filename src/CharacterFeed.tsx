@@ -67,7 +67,7 @@ export const CharacterFeed = () => {
 }
 
 const Container = styled.div(({ theme }) => ({
-    backgroundColor: theme.colors.common.black,
+    backgroundColor: theme.colors.seaGreen,
     flex: 1,
     minHeight: '100%',
     flexDirection: 'column'

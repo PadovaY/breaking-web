@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Text } from '../Text/Text';
 import { StatusFilter } from '../Filter/StatusFilter';
 import { SeasonFilter } from '../Filter/SeasonFilter';
+import { theme } from '../../theme';
 interface SearchBarProps {
     value?: string,
     onChange: (searchValue?: string) => void;
@@ -15,7 +16,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ value, onChange }) => {
     return (
         <Container>
             <SearchContainer>
-                <Text text="Search by name: " variant='body1' />
+                <Text text="Search by name: " variant='body1' color={theme.colors.common.black} />
                 <TextField data-testid="searchInput" label="type anything" variant="outlined" value={value} onChange={onInputChange} />
                 <Filters>
                     <StatusFilter />

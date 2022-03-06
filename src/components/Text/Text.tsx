@@ -6,14 +6,16 @@ import styled from 'styled-components';
 interface TextProps {
     text: string;
     variant?: "inherit" | Variant;
+    color?: string
 }
 
-export const Text: React.FC<TextProps> = ({ text, variant = 'subtitle1' }) => {
+export const Text: React.FC<TextProps> = ({ text, variant = 'subtitle2', color }) => {
     return (
-        <TypographyStyled variant={variant} >{text}</TypographyStyled>
+        <TypographyStyled variant={variant} textColor={color}>{text}</TypographyStyled>
     )
 }
 
-const TypographyStyled = styled(Typography)(({ theme }) => ({
-    paddingRight: theme.spacing.petit
+const TypographyStyled = styled(Typography)<{ textColor?: string }>(({ theme, textColor }) => ({
+    paddingRight: theme.spacing.petit,
+    color: textColor || theme.colors.common.white
 }))

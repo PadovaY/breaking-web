@@ -5,12 +5,15 @@ import CloseIcon from '@mui/icons-material/Close';
 import { Dialog, DialogTitle, DialogContent, DialogContentText, Slide } from '@mui/material';
 import { Text } from '../Text/Text';
 import styled from 'styled-components';
+import { theme } from '../../theme';
 
 interface CharacterModalProps {
     open: boolean;
     onClose: () => void;
     char?: Character
 }
+
+const DISALLOWED_FIELDS = ['char_id', 'better_call_saul_appearance', 'img'];
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -21,7 +24,9 @@ export const CharacterModal: React.FC<CharacterModalProps> = ({ open, onClose, c
         return null;
     }
 
-    const charDetails = Object.entries(char).filter(([key]) => key !== 'char_id').map(([key, value]) => `${key}: ${value}`);
+    const charDetails = Object.entries(char)
+        .filter(([key]) => !DISALLOWED_FIELDS.includes(key))
+        .map(([key, value]) => `${key}: ${value}`);
 
     return (
         <Dialog
@@ -46,7 +51,7 @@ export const CharacterModal: React.FC<CharacterModalProps> = ({ open, onClose, c
             </DialogContent>
             <DialogContentText>
                 <DetailsContainer>
-                    {charDetails.map((detail) => <Text key={detail} text={detail} />)}
+                    {charDetails.map((detail) => <Text key={detail} text={detail} color={theme.colors.common.black} />)}
                 </DetailsContainer>
             </DialogContentText>
         </Dialog>
