@@ -2,7 +2,7 @@ import React from 'react';
 import IconButton from '@mui/material/IconButton';
 import { Character } from '../../types';
 import CloseIcon from '@mui/icons-material/Close';
-import { Dialog, DialogTitle, DialogContent, DialogContentText, Slide } from '@mui/material';
+import { Dialog, DialogTitle, DialogContent, DialogContentText } from '@mui/material';
 import { Text } from '../Text/Text';
 import styled from 'styled-components';
 import { theme } from '../../theme';
@@ -14,10 +14,6 @@ interface CharacterModalProps {
 }
 
 const DISALLOWED_FIELDS = ['char_id', 'better_call_saul_appearance', 'img'];
-
-const Transition = React.forwardRef(function Transition(props, ref) {
-    return <Slide direction="up" ref={ref} {...props} />;
-});
 
 export const CharacterModal: React.FC<CharacterModalProps> = ({ open, onClose, char }) => {
     if (!char) {
@@ -32,7 +28,6 @@ export const CharacterModal: React.FC<CharacterModalProps> = ({ open, onClose, c
         <Dialog
             open={open}
             onClose={onClose}
-            TransitionComponent={Transition}
         >
             <DialogTitle>
                 {char?.name}
@@ -49,11 +44,9 @@ export const CharacterModal: React.FC<CharacterModalProps> = ({ open, onClose, c
                     <img src={char.img} height="400" />
                 </ImageContainer>
             </DialogContent>
-            <DialogContentText>
-                <DetailsContainer>
-                    {charDetails.map((detail) => <Text key={detail} text={detail} color={theme.colors.common.black} />)}
-                </DetailsContainer>
-            </DialogContentText>
+            <DetailsContainer>
+                {charDetails.map((detail) => <Text key={detail} text={detail} color={theme.colors.common.black} />)}
+            </DetailsContainer>
         </Dialog>
     )
 }

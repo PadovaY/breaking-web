@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography } from '@material-ui/core';
+import { Typography } from '@mui/material';
 import styled from 'styled-components';
 
 export const LoaderMessage = () => <Loader data-testid="loader"><Typography variant="caption" style={{ color: 'white' }}>Loading...</Typography></Loader>

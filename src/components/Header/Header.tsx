@@ -1,5 +1,5 @@
+import { AppBar, Avatar, Toolbar, Typography } from '@mui/material';
 import React from 'react';
-import { AppBar, Avatar, Toolbar, Typography } from '@material-ui/core';
 import styled from 'styled-components';
 import { theme } from '../../theme';
 

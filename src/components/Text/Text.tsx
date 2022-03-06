@@ -1,6 +1,6 @@
+import { Typography } from '@mui/material';
+import { Variant } from '@mui/material/styles/createTypography';
 import React from 'react';
-import { Typography } from '@material-ui/core';
-import { Variant } from '@material-ui/core/styles/createTypography';
 import styled from 'styled-components';
 
 interface TextProps {

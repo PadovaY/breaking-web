@@ -4,6 +4,7 @@ import { CharacterCard } from './CharacterCard';
 import { ThemeProvider } from 'styled-components';
 import { theme } from '../../theme';
 import { renderWithProvider } from '../../TestRender';
+import { CharacterDetails } from './CharacterDetails';
 
 
 const dummyChar = {
@@ -21,17 +22,10 @@ const dummyChar = {
     portrayed: "Bryan Cranston",
     better_call_saul_appearance: []
 }
-describe('CharacterCard', () => {
+describe('CharacterDetails', () => {
     it('should mount properly', () => {
-        const { getByTestId } = renderWithProvider(<CharacterCard char={dummyChar} onClick={jest.fn} />);
-        expect(getByTestId('charCard')).toBeTruthy();
-    });
-
-    it('should call onClick properly', () => {
-        const mockedOnClick = jest.fn();
-        const { getByTestId } = renderWithProvider(<CharacterCard char={dummyChar} onClick={mockedOnClick} />);
-        fireEvent.click(getByTestId('charCard'));
-        expect(mockedOnClick).toHaveBeenCalled();
+        const { getByTestId } = renderWithProvider(<CharacterDetails char={dummyChar} />);
+        expect(getByTestId('charDetails')).toBeTruthy();
     });
 
 });

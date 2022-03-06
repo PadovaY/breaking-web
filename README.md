@@ -15,7 +15,7 @@ breaking bad characters web app
 
  # Project structure 
 
-this project was initialized by Vite, 
+this project was initialized by ~~Vite~~ create-react-app, 
 using the latest FE technologies such as: 
 - React 
 - React query
@@ -33,7 +33,7 @@ using the latest FE technologies such as:
 
 
 # Known issues
-- unit testing is not working yet with Vite
+- ~~unit testing is not working yet with Vite~~ migrated to create-react-app
 - visual design is not the best 😄
 <br/>
 
