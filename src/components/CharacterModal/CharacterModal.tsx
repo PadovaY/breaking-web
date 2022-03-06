@@ -25,13 +25,11 @@ export const CharacterModal: React.FC<CharacterModalProps> = ({ open, onClose, c
         .map(([key, value]) => `${key}: ${value}`);
 
     return (
-        <Dialog
-            open={open}
-            onClose={onClose}
-        >
+        <Dialog open={open} onClose={onClose} data-testid="characterModal">
             <DialogTitle>
                 {char?.name}
                 <IconButton
+                    data-testid="closeModal"
                     aria-label="close"
                     onClick={onClose}
                     sx={closeStyle}
@@ -47,7 +45,7 @@ export const CharacterModal: React.FC<CharacterModalProps> = ({ open, onClose, c
             <DetailsContainer>
                 {charDetails.map((detail) => <Text key={detail} text={detail} color={theme.colors.common.black} />)}
             </DetailsContainer>
-        </Dialog>
+        </Dialog >
     )
 }
 

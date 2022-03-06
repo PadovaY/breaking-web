@@ -14,7 +14,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ value, onChange }) => {
     const onInputChange = useCallback((e) => onChange(e?.target?.value), []);
 
     return (
-        <Container>
+        <Container data-testid="searchBar">
             <SearchContainer>
                 <Text text="Search by name: " variant='body1' color={theme.colors.common.black} />
                 <TextField data-testid="searchInput" label="type anything" variant="outlined" value={value} onChange={onInputChange} />

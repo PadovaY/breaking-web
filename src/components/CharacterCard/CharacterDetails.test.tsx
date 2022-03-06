@@ -1,8 +1,3 @@
-import React from 'react';
-import { fireEvent, render } from '@testing-library/react';
-import { CharacterCard } from './CharacterCard';
-import { ThemeProvider } from 'styled-components';
-import { theme } from '../../theme';
 import { renderWithProvider } from '../../TestRender';
 import { CharacterDetails } from './CharacterDetails';
 
